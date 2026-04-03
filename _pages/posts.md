@@ -4,4 +4,3 @@ permalink: /posts/
 author_profile: true
 ---
 
-{{ content }}
