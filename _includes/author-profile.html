@@ -243,4 +243,11 @@
       {% include author-profile-custom-links.html %}
     </ul>
   </div>
+  <div style="margin-top:1.5em; font-size:0.95em; color:#888; text-align:center;">
+    {% if page.last_modified_at %}
+      <span>上次更新时间：{{ page.last_modified_at | date: '%Y-%m-%d %H:%M' }}</span>
+    {% else %}
+      <span>上次更新时间：{{ page.date | date: '%Y-%m-%d %H:%M' }}</span>
+    {% endif %}
+  </div>
 </div>
