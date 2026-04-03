@@ -1,0 +1,47 @@
+<style>
+.tag-filter-bar {
+  margin-bottom: 1.5em;
+  padding: 1em;
+  background: #f7f7f7;
+  border-radius: 6px;
+}
+.tag-filter-bar .tag-btn {
+  display: inline-block;
+  margin: 0.2em 0.3em;
+  padding: 0.3em 0.8em;
+  border: 1px solid #bbb;
+  border-radius: 2em;
+  background: #fff;
+  color: #333;
+  cursor: pointer;
+  font-size: 0.95em;
+  transition: background 0.2s, color 0.2s;
+}
+.tag-filter-bar .tag-btn.selected {
+  background: #007acc;
+  color: #fff;
+  border-color: #007acc;
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var tagBtns = document.querySelectorAll('.tag-filter-bar .tag-btn');
+  var posts = document.querySelectorAll('.archive__item');
+  var postTags = Array.from(posts).map(function(post) {
+    return (post.getAttribute('data-tags') || '').split(',').map(function(t) { return t.trim(); });
+  });
+  tagBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      btn.classList.toggle('selected');
+      var selected = Array.from(tagBtns).filter(function(b) { return b.classList.contains('selected'); }).map(function(b) { return b.dataset.tag; });
+      posts.forEach(function(post, idx) {
+        if (selected.length === 0 || selected.every(function(tag) { return postTags[idx].includes(tag); })) {
+          post.style.display = '';
+        } else {
+          post.style.display = 'none';
+        }
+      });
+    });
+  });
+});
+</script>
